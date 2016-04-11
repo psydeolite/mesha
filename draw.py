@@ -14,9 +14,30 @@ def draw_polygons( points, screen, color ):
     #    i=0
     i=0
     while i<len(points)-2:
-        draw_line(screen, points[i][0], points[i][1], points[i+1][0], points[i+1][1], color)
-        draw_line(screen, points[i+1][0], points[i+1][1], points[i+2][0], points[i+2][1], color)
-        draw_line(screen, points[i+2][0], points[i+2][1], points[i][0], points[i][1], color)
+        Nx=0
+        Ny=0
+        Nz=0
+
+        Vx=0
+        Vy=0
+        Vz=-1
+        
+        Ax=points[i+1][0]-points[i][0]
+        Ay=points[i+1][1]-points[i][1]
+        Az=points[i+1][2]-points[i][2]
+
+        Bx=points[i+2][0]-points[i][0]
+        By=points[i+2][1]-points[i+1][1]
+        Bz=points[i+2][2]-points[i+1][2]
+        
+
+        N=[ Ay*Bz - Az*By, Az*Bx - Ax*Bz, Ax*By - Ay*Bx ]
+        result=Nx*Vx + Ny*Vy + Nz*Vz
+
+        if result<0:
+            draw_line(screen, points[i][0], points[i][1], points[i+1][0], points[i+1][1], color)
+            draw_line(screen, points[i+1][0], points[i+1][1], points[i+2][0], points[i+2][1], color)
+            draw_line(screen, points[i+2][0], points[i+2][1], points[i][0], points[i][1], color)
         i+=3
     #else:
     #    print "Need 3+ points to draw polygon"
