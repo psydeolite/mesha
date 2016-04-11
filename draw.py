@@ -30,11 +30,14 @@ def draw_polygons( points, screen, color ):
         By=points[i+2][1]-points[i+1][1]
         Bz=points[i+2][2]-points[i+1][2]
         
-
-        N=[ Ay*Bz - Az*By, Az*Bx - Ax*Bz, Ax*By - Ay*Bx ]
-        result=Nx*Vx + Ny*Vy + Nz*Vz
+        Nx=Ay*Bz - Az*By
+        Ny=Az*Bx - Ax*Bz
+        Nz=Ax*By - Ay*Bx
+        
+        result= Nx*Vx + Ny*Vy + Nz*Vz
 
         if result<0:
+            
             draw_line(screen, points[i][0], points[i][1], points[i+1][0], points[i+1][1], color)
             draw_line(screen, points[i+1][0], points[i+1][1], points[i+2][0], points[i+2][1], color)
             draw_line(screen, points[i+2][0], points[i+2][1], points[i][0], points[i][1], color)
